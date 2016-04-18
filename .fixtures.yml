@@ -1,0 +1,7 @@
+fixtures:
+  repositories:
+    stdlib:
+      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: "4dab70b305c4ab1c8c36356efa4bd205678c7c49"
+  symlinks:
+    remaster: "#{source_dir}"
