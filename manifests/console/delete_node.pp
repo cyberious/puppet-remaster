@@ -11,12 +11,12 @@ define remaster::console::delete_node (
     "--key /etc/puppetlabs/puppet/ssl/private_keys/${::fqdn}.pem",
     '--cacert /etc/puppetlabs/puppet/ssl/certs/ca.pem',
     '-H "Content-Type: application/json"',
-    '| grep "Resource not found"'
+    '| grep "not found"'
   ]
   exec { "clean node ${node}":
     environment => 'RAILS_ENV=production',
-    command     => "rake -f /opt/puppet/share/puppet-dashboard/Rakefile node:del[${node}]",
-    onlyit      => join($query,' '),
+    command     => "/opt/puppet/bin/rake -f /opt/puppet/share/puppet-dashboard/Rakefile node:del[${node}]",
+    onlyif      => join($query,' '),
   }
 
 }

@@ -1,5 +1,11 @@
 #
-define remaster::master::delete_node ($node = $name, $master = $servername) {
+define remaster::master::delete_node (
+  $node = $name,
+  $master = $servername,
+  $cert_delete_style = 'clean'
+) {
+
+  validate_re($cert_delete_style, ['^clean$', '^revoke$'])
   Exec {
     path => $::path,
   }
@@ -9,7 +15,7 @@ define remaster::master::delete_node ($node = $name, $master = $servername) {
   }
 
   exec {"delete node ${node}":
-    command => "/opt/puppet/bin/puppet cert clean ${node}",
+    command => "/opt/puppet/bin/puppet cert ${cert_delete_style} ${node}",
     onlyif  => "/opt/puppet/bin/puppet cert list ${node}",
   }
 }
