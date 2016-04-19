@@ -16,7 +16,7 @@ define remaster::console::delete_node (
   exec { "clean node ${node}":
     environment => 'RAILS_ENV=production',
     command     => "/opt/puppet/bin/rake -f /opt/puppet/share/puppet-dashboard/Rakefile node:del[${node}]",
-    onlyif      => join($query,' '),
+    unless      => join($query,' '),
   }
 
 }
