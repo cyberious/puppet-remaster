@@ -3,7 +3,7 @@ define remaster::console::delete_node (
   $node = $name,
   ){
   Exec{
-    path => "${::path};/opt/puppet/bin",
+    path => [$::path, '/opt/puppet/bin'],
   }
   $query = [
     "curl https://${::fqdn}:4433/classifier-api/v1/node/${node}",
